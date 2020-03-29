@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    color: #000000;
+    background-color: #f6f6f6;
+}
+
+header {
+    color: #000000;
+    background-color: cornflowerblue;
+    text-align: center;
+    height: 40px;
+}
+
+nav {
+    float: left;
+    margin: auto 3em;
+    padding-left: 100px;
+}
+
+li {
+    display: inline-block;
+}
+
+a {
+    color: white;
+    text-decoration:none;
+}
+h3 a{
+    padding: 10px;
+}
+
+h4{
+    font-weight: bold;
+    padding: 20px 20px 20px 10px;
+}
+
+a:hover{
+    color: burlywood;
+}
+
+p{padding: 10px}
+
+.div-left{
+    float: right;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.div-right {
+    margin-right: 200px;
+    margin-top: 10px;
+    padding-right: 20px;
+    color: white;
+    float: right;
+    font-weight: bold;
+}
+
+.contents{
+    padding: 10px;
+    margin: 20px 150px;
+    background-color: white;
+}
+
+.functions{
+    background-color: white;
+}
+
+.title{
+    color: #000000;
+}
+
+.title {
+    display: inline;
+    text-align: center;
+}
+
+.title img {
+    border: #b8b6b4 solid 2px;
+}
+
+.title div {
+    display: inline;
+    padding-left: 0.5em;
+    margin: auto 0;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+
+.active {
+    color:cornflowerblue;
+}
+
+.more{
+    font-size: small;
+    color: cornflowerblue;
+}
+
+aside {
+    float:right;
+    margin: 1% 5%;
+}
+
+aside a {
+    color: black;
+}
+
+aside ul {
+    padding: 0;
+    width: 100%;
+}
+
+aside li {
+    display: block;
+    text-align: center;
+    padding: 5px;
+}
+
+ul li {
+    display: block;
+}
+
+.comment1{
+    text-align: left;
+}
+
+ol li{padding: 10px;}
+
+article blockquote {
+    margin: 0;
+    width: 60%;
+    font-size: small;
+    padding: 0.7em;
+    color: #b8b6b4;
+    border-bottom: 1px solid rgba(85, 125, 171, 0.6)
+}
+
+footer{text-align: center}

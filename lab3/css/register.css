@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    color: #000000;
+    background-color: #f6f6f6;
+}
+
+header {
+    background-color: cornflowerblue;
+    height: 40px;
+}
+
+a {
+    color: white;
+    text-decoration:none;
+}
+
+a:hover{
+    color: burlywood;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: large;
+    margin: 20px 150px;
+}
+
+p{padding-bottom: 10px}
+
+.div-left{
+    float: right;
+    margin: 10px 40px auto;/*以右上角为坐标原点（因为float:right？)*/
+}
+
+.contents{
+    padding: 30px;
+    margin: 20px 150px;
+    background-color: white;
+}
+
+input, textarea {
+    padding: 0.5em;
+    margin: 0.5em 0;/*在其周围画框*/
+    width: 35%;
+    background-color: #ffffff;
+    border: #56707f solid 1px;
+    border-radius: 3px;
+    color: #000000
+}
+
+select {
+    background-color: #ffffff;
+    border: #56707f solid 1px;
+    color: #000000;
+    padding: 0.5em;
+    margin: 0.5em 0;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    width: 2em;
+}
+
+input[type="button"],input[type="submit"]  {
+    background-color: #ffffff;
+    border: #171a21 solid 1px;
+    width: 4em;
+}
+
+input[type="button"],input[type="submit"],input[type="checkbox"], input[type="radio"], select:hover {
+    cursor: pointer;
+}
+
+textarea {
+    height: 15em;
+}

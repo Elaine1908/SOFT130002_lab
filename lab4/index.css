@@ -1,0 +1,11 @@
+.navbar-brand{
+    padding: 6px 6px;
+}
+
+.row{
+    margin-top: 30px;
+    margin-left: 110px;
+}
+.carousel-inner{width: 100%;}
+
+footer {background-color: black;height:40px;color:gainsboro;font-family: "Century Gothic", sans-serif;bottom:0;font-size: small;width: 100%}

@@ -49,5 +49,6 @@
 
 
 ## github&网站截图
-![lab5.png](lab5.png)
+![lab5.jpg](lab5.jpg)
+![github.jpg](github.jpg)
 

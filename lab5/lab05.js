@@ -10,7 +10,17 @@ let url_submit = document.getElementById("url_submit");
 let url_result = document.getElementById("url-result");
 url_submit.addEventListener('click',showWindowHref);
 function showWindowHref(){
-
+    let search = url.value.split('?');
+    let parameter = search[1].split('&');
+    for (var i = 0; i < parameter.length; i++) {
+        var pair = parameter[i].split("=");
+        if(pair[0] === "name"){
+            name = pair[1];
+            break;
+        }
+        else{name = 0;}
+    }
+    url_result.value = name;
 }
 //2. 每隔五秒运行一次函数直到某一整分钟停止，比如从20:55:45运行到20:56:00停止；或者运行10次，先到的为准。从1开始每过五秒，输入框内数值翻倍。初始值为1。
 //注意：你可以在函数 timeTest内部 和 timeTest外部 写代码使得该功能实现。
@@ -18,8 +28,18 @@ function showWindowHref(){
 
 //提示：mul为html中id为"mul"的元素对象，可直接通过mul.value获得其内的输入值。
 let mul = document.getElementById("mul");
+var interval = window.setInterval("timeTest()",5000);
+var num = 1;
+var count = 0;
+mul.value = 1;
 function timeTest(){
+    num *= 2;
+    count++;
+    mul.value = num;
+    if (count >= 10 || (60 - new Date().getSeconds()) < 5)
+        window.clearInterval(interval);
 }
+
 //3. 判断输入框most里出现最多的字符，并统计出来。统计出是信息在most_result输入框内以"The most character is:" + index + " times:" + max的形式显示。
 //如果多个出现数量一样则选择一个即可。
 //请仅在arrSameStr函数内写代码。
@@ -30,5 +50,25 @@ let result = document.getElementById("most-result");
 let most_submit = document.getElementById("most_submit");
 most_submit.addEventListener('click',arrSameStr);
 function arrSameStr(){
-
+    //先对字符串遍历计数 保存在o中
+    var str = most.value;
+    var o = {};
+    for(i = 0;i < str.length;i++){
+        var char = str.charAt(i);//char就是对象o的一个属性，o[char]是属性值，存储出现的次数
+        if(o[char]){
+            o[char]++;
+        }else{
+            o[char] = 1;
+        }
+    }
+    //找出属性值max
+    var max = 0;
+    var index = "";
+    for(char in o){
+        if(max < o[char]){
+            max = o[char];
+            index = char;
+        }
+    }
+    document.getElementById("most-result").value =  "The most character is :" + index + "  times:" + max;
 }

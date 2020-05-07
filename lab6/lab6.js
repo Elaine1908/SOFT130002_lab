@@ -1,121 +1,150 @@
-/*
-1.
-背景：
-    每隔五秒运行一次函数直到某一整分钟停止，比如从20:55:45运行到20:56:00停止；
-    或者运行10次，先到的为准。从1开始每过五秒，输入框内数值翻倍。初始值为1。
-注意：
-    你可以在函数 timeTest内部 和 timeTest外部 写代码使得该功能实现。
-要求：
-    ①要求使用JS闭包的方式使得计数实现局部私有，不可以在全局区域声明计数变量。
-    ②使用console.log打印计数即可，到达一分钟提前停止也需要console.log相应的提示语句。
-*/
 
-function testTime(){
+    function testTime(){
 
-}
-// testTime();
+            let num = 1;
+            console.log(num);
+            let counter = 0;
+            let change = setInterval( function(){
+                num *= 2;
+                console.log(num);
+                counter++;
+                if ((60 - new Date().getSeconds()) < 5){
+                    console.log("A new minute! Counting is stopped.");
+                    clearInterval(change);
+                } else if (counter >= 9){
+                    console.log("Counter has reached 10 !");
+                    clearInterval(change);
+                }
+            }, 5000);
+    }
 
-/*
-2.
-要求：
-    ①能够对传入的、移动手机电话（11位）、邮箱字符串（上网查找其要求）进行正则判定。
-    ②使用console.log打印即可，例如，电话不符合要求但是邮箱符合要求，则console.log("The telephone is right and the mail is wrong!")。
-    ③邮箱字符串的正则匹配的理解需写入lab文档。
-    ④telephone与mail均是字符串。
-*/
+
+
+
 function testMail(telephone,mail) {
-
+    console.log('第2题');
+    let pattern1 = /^1([3456789])\d{9}$/;//表示以1开头，第二个数字为3-9中一个，后9为数字任意的数字串
+    let pattern2 = /^([a-zA-Z]|[0-9])(\w|-|_)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+    let test1 = pattern1.test(telephone);
+    let test2 = pattern2.test(mail);
+    console.log('The telephone is '+ test1 +' and the mail is '+ test2 +'!');
 }
 
-/*
-3.
-要求：
-    ①输入一段全英文语句，要求使用正则表达式找到相邻的重复单词放入一个Set，如果集合中元素超过10个，则按照首字母顺序取前10个于集合。
-    ②使用console.log打印即可，将该集合打印出来。
-    ③例如：输入"Is is the iS is cost of of gasoline going up up"，输出：Set { 'Is is', 'iS is', 'of of', 'up up' }。
-    ④对该函数中用的正则匹配的理解需写入lab文档。
-    ⑤str为字符串。
-*/
+
 function testRedundancy(str) {
-
+        console.log('第3题');
+        let string = str.split(" ");
+        let container = "";
+        let result = new Set();
+        for(let i = 0; i < string.length - 1; i++){
+            let pattern = new RegExp(string[i], "i");
+            if(pattern.test(string[i + 1]) && result.size < 10){
+                container = string[i] + " " + string[i + 1];
+                result.add(container);
+            }
+        }
+        console.log(result);
 }
 
 
-/*
-4.
-背景：
-    旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。
-    现在给出应该输入的一段文字、以及实际被输入的文字，请你使用Set列出肯定坏掉的那些键。
-    例如：输入7_This_is_a_test和_hs_s_a_es    输出：Set { '7', 'T', 'I' }
-要求：
-    ①需要使用Set。
-    ②只能使用一次循环。
-    ③使用console.log打印即可，将该集合打印出来。
-    ④wantInput和actualInput为字符串。
-注意：
-    ①注意联系生活，并注意观察我给的上述例子。
-*/
+
 function testKeyBoard(wantInput, actualInput) {
-
+    console.log('第4题');
+    let ans = new Set();
+    let index = 0;
+    let wantArray = wantInput.split("");
+    let actualArray = actualInput.split("");
+    for(let i = 0; i < wantArray.length; i++){
+        if(wantArray[i] !== actualArray[ i - index]){
+            ans.add(wantArray[i].toUpperCase());
+            index++
+        }
+    }
+    console.log(ans);
 }
 
-/*
-5.
-背景：
-    给定一个输入英文语句字符串，反转该语句。例如the sky is blue变成blue is sky the。
-要求：
-    ①如果输入的字符串前后有空格，输出中应该去除前后空格。如果输入字符串中间出现连续的两个空格，输出应该变为一个。
-    比如输入是“  hello  world!  ”，输出应该是“world! hello”。
-    ②请使用Array。
-    ③使用console.log打印即可，将该字符串打印出来。
-    ④只能显式使用一次循环。
-    ⑤str为字符串。
-*/
+
 function testSpecialReverse(str) {
+    console.log('第5题');
+    let array = str.split(' ').reverse().filter(function (s) {
+        return s && s.trim(); // 注：IE9(不包含IE9)以下的版本没有trim()方法
+    }).join(' ');//先分割数组，在倒转，去除空元素，加入空格
+
+    console.log(array.toString());
 }
 
-/*
-6.
-背景：
-    给定一个整数数组和一个值，找出相加为该值的两个元素下标并保存在一个数组中。
-    例如给定 [2, 7, 11, 15]和9,
-    打印结果为[0,1]
-要求：
-    ①使用Map。
-    ②只能显式使用一次循环。
-    ③使用console.log打印即可，将满足条件的数组打印出来。
-    ④nums为数字数组，如[1,2,3,4],target为数字,如5，那么输出为
-    [ 0, 3 ]
-    [ 1, 2 ]
-*/
 
 function twoSum(nums, target) {
+    console.log('第6题');
+    let map = new Map();
+    let ans = [];
+    for(let i = 0; i < nums.length; i++){
+        map.set(nums[i],i);
+        let num = map.get(target - nums[i]);//一边放一边用map.get（key键值）找
+        if (num !== undefined){
+            ans.push(num);
+            ans.push(i);
+            console.log(ans);
+            ans = [];
+        }
+    }
 }
 
 
-/*
-7.
-背景：
-    打印最长的包含不同字符串的子字符串长度。
-要求：
-    ①使用Map。
-    ②例如：输入"abbbbb",输出2，输入"bbbbb",输出1；
-    ③只能显式使用一次循环。
-    ④使用console.log打印即可。
-    ⑤str为字符串。
-*/
 function lengthOfLongestSubstring(str) {
+    console.log('第7题');
+    let n = str.length;
+    let ans = 0;
+    let map = new Map();    //存放字符数组和索引，key:char,value:index
+        for (let j = 0, i = 0; j < n; j++) {
+        if (map.has(str.charAt(j))) {
+        i = Math.max(map.get(str.charAt(j)), i);   //包含下一个字符就把i移到相同字符的后一个位置
+    }
+    ans = Math.max(ans, j - i + 1);             //判断长度是否要改变
+    map.set(str.charAt(j), j + 1);              //把字符和索引放进map，重复的会进行覆盖
+}
+    console.log(ans);
 }
 
-/*
-8.
-背景：
-    该部分只是为了让你们自己动动手更好地感受不同继承方式。
-要求：
-    ①借助构造函数、原型链、和Object.create分别编写DevelopingCountry、PoorCountry、DevelopedCountry以实现对Country的继承，
-    并在三者分别添加sayHi、saySad、sayHappy函数分别打印"Hi,i am a developing country."、"I am a sad poor country."、"I am a Happy developed country."
-    ②请调用他们并打印相关语句即可。
-*/
 function Country() {
     this.name = "国家";
 }
+
+//构造函数
+function DevelopingCountry() {
+    Country.call(this);
+    this.sayHi = function () {
+    console.log("Hi,i am a developing country.")
+    }
+}
+
+//原型链
+function PoorCountry(){ }
+PoorCountry.prototype = new Country();
+PoorCountry.prototype.saySad = function () {
+    console.log("I am a sad poor country.");
+};
+
+//原型式继承
+let DevelopedCountry = Object.create(new Country());
+DevelopedCountry.sayHappy = function () {
+    console.log("I am a Happy developed country.")
+};
+
+
+    testMail(18227880096,'child_20000@126.com');
+    testRedundancy('Is is IS the iS is cost of of gasoline going up up');
+    testKeyBoard('7_This_is_a_test','_hs_s_a_es');
+    testSpecialReverse('the  sky is blue');
+    twoSum([2,7,11,15],9);
+    lengthOfLongestSubstring("abbbb");
+
+    console.log('第8题');
+    let c1 = new DevelopingCountry();
+    c1.sayHi();
+    let c2 = new PoorCountry();
+    c2.saySad();
+    DevelopedCountry.sayHappy();
+    console.log('第1题');
+    testTime();
+

@@ -2,12 +2,10 @@
 /*请在该区域内声明或者获取所要使用的全局变量*/
 /********************************************begin************************************/
 
-/*Global Variable Area */
+var index = 0;//每个图片的下标
+var timer = null;//计时器
 
 /*********************************************end*************************************/
-
-
-
 /* 任务一
  * 请参考css中的style参数、html中的内容、下方的效果要求，然后在下面区域内编写代码。
  * 效果要求：
@@ -21,12 +19,56 @@
  * ⑤本部分只能使用原生JS。
  */
 /********************************************begin************************************/
+var wrap = document.querySelector(".wrap");
+var leftArrow = document.querySelector('.container .arrow_left');
+var rightArrow = document.querySelector('.container .arrow_right');
 
-/*Code Here*/
+rightArrow.addEventListener("click",function () {
+    nextPic()
+});
+leftArrow.addEventListener("click",function () {
+    lastPic();
+});
+
+function nextPic () {
+    index++;
+    if(index > 4){
+        index = 0;
+    }
+    changeDot();
+    let newLeft;
+    if(wrap.style.left === "-3600px"){
+        newLeft = -1200;
+    }else{
+        newLeft = parseInt(wrap.style.left)-600;
+    }
+    wrap.style.left = newLeft + "px";
+}
+
+function lastPic () {
+    index--;
+    if(index < 0){
+        index = 4;
+    }
+    changeDot();
+    var newLeft;
+    if(wrap.style.left === "0px"){
+        newLeft = -2400;
+    }else{
+        newLeft = parseInt(wrap.style.left)+600;
+    }
+    wrap.style.left = newLeft + "px";
+}
+
+var dots = document.getElementsByTagName("span");
+function changeDot () {
+    for(let i = 0, len = dots.length; i < len; i++){
+        dots[i].className = "";
+    }
+    dots[index].className = "on";
+}
 
 /*********************************************end*************************************/
-
-
 
 /* 任务二
  * 请参考css中的style参数、html中的内容、下方的效果要求，然后在下面区域内编写代码。
@@ -39,11 +81,18 @@
  */
 /********************************************begin************************************/
 
-/*Code Here*/
-
+window.addEventListener("load",autoPlay);
+function autoPlay () {
+    timer = setInterval(nextPic,2000);
+}
+var container = document.querySelector(".container");
+container.onmouseenter = function () {
+    clearInterval(timer);
+};
+container.onmouseleave = function () {
+    autoPlay();
+};
 /*********************************************end*************************************/
-
-
 
 /* 任务三
  * 请参考css中的style参数、html中的内容、下方的效果要求，然后在下面区域内编写代码。
@@ -53,11 +102,23 @@
  * ③本部分只能使用原生JS。
  */
 /********************************************begin************************************/
-
-/*Code Here*/
-
+for (var i = 0, len = dots.length; i < len; i++){
+    (function(i){
+        dots[i].onclick = function () {
+            var gap = index - i;
+            if(index === 4 && parseInt(wrap.style.left)!==-3000){
+                gap = gap - 5;
+            }
+            if(index === 0 && parseInt(wrap.style.left)!== -600){
+                gap = 5 + gap;
+            }
+            wrap.style.left = (parseInt(wrap.style.left) +  gap * 600)+"px";
+            index = i;
+            changeDot();
+        }
+    })(i);
+}
 /*********************************************end*************************************/
-
 
 /*任务四
  * 请参考css中的style参数、html中的内容、下方的效果要求，然后在下面区域内编写代码。
@@ -68,6 +129,28 @@
  */
 /********************************************begin************************************/
 
-/*Code Here*/
+
+$(document).ready(function() {
+    //设置td的点击事件
+    $("td").click(function() {
+        let td = $(this);
+        let content = td.html();
+        //将td变成一个input进行输入
+        td.html("<input type = 'text' class = 'currentInput' >");
+        let input = $('.currentInput');
+        input.attr({"value": content});
+        //input聚焦
+        input.focus();
+        //将input的点击事件设置成false
+        input.click(function() {
+            return false;
+        });
+        //失去焦点时将input变回文本
+        input.blur(function() {
+            let newContent = input.val();
+            td.html(newContent);
+        });
+    });
+});
 
 /*********************************************end*************************************/

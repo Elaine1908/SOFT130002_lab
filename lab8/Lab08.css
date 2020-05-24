@@ -9,7 +9,7 @@ a{
     position: relative;
     width: 600px;
     height: 400px;
-    margin:100px auto 0 auto;
+    margin:50px auto 20px auto;
     box-shadow: 0 0 5px green;
     overflow: hidden;
 }
@@ -67,4 +67,11 @@ a{
 }
 .container .arrow:hover {
     background-color: rgba(0,0,0,0.2);
+}
+table{
+    margin:auto;
+    text-align: center;
+}
+td{
+    width: 200px;
 }

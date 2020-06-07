@@ -3,7 +3,7 @@
  
 ## Exercise7: MYSQL THROUGH PHP ：两种访问数据库的方式
 
-**方法一 ： pdo **
+**方法一 ： pdo**
 
 `$pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS)` 连接数据库
 
@@ -45,7 +45,7 @@
 3. outputSinglePainting($row)
 
    此方法通过获得的$row数据，依次输出数组中的照片名称，标题与介绍；
-   同时输出<div><h4>等标签保持html页面规整显示。
+   同时输出 div，h4 等标签保持html页面规整显示。
    
    
 ![](screenshots/3.png)

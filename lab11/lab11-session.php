@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   <title>Exercise 13-1 | Using Cookies</title>
+   <title>Exercise 13-1 | Using Session</title>
 </head>
 
 <body>
@@ -31,7 +31,6 @@ function validLogin(){
 }
 
 
-
 function getLoginForm(){
    return "
 <form action='' method='post' role='form'>
@@ -48,33 +47,40 @@ function getLoginForm(){
 </form>";
 }
 ?>
- <div class="container theme-showcase" role="main">
+ <div class="container theme-showcase" role="main">  
       <div class="jumbotron">
         <h1>
 <?php
 
-$loggedIn=false;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(validLogin()){
-        echo "Welcome ".$_POST['username'];
-        $loggedIn=true;
-    }
-    else{
+    if (validLogin()) {
+        // add 1 day to the current time for expiry time
+        $expiryTime = time() + 60 * 60 * 24;
+        $_SESSION['Username'] = $_POST['username'];
+        if (isset($_SESSION['Username'])) {
+            echo "Welcome " . $_SESSION['Username'];
+        } else {
+            echo "login unsuccessful";
+        }
+    } else {
         echo "login unsuccessful";
     }
-} else{
+}
+else{
     echo "No Post detected";
 }
 
-
 ?>
-
 </h1>
+          <a href="logout.php">logout</a>
       </div>
 <?php
-if(!$loggedIn){
+
+if (!isset($_SESSION['Username'])){
     echo getLoginForm();
-} else{
+}
+else{
     echo "This is some content";
 }
 ?>
